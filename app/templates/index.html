@@ -1,16 +1,1970 @@
-{% extends "base.html" %}
-{% import "bootstrap/wtf.html" as wtf %}
+<!DOCTYPE html>
+<!--[if lt IE 7 ]><html class="ie ie6" lang="en"> <![endif]-->
+<!--[if IE 7 ]><html class="ie ie7" lang="en"> <![endif]-->
+<!--[if IE 8 ]><html class="ie ie8" lang="en"> <![endif]-->
+<!--[if (gte IE 9)|!(IE)]><!--><html lang="ru"> <!--<![endif]-->
 
-{% block title %}Flasky{% endblock %}
+<head>
 
-{% block page_content %}
-<div class="page-header">
-    <h1>Hello, {% if name %}{{ name }}{% else %}Stranger{% endif %}!</h1>
-    {% if not known %}
-    <p>Pleased to meet you!</p>
-    {% else %}
-    <p>Happy to see you again!</p>
-    {% endif %}
-</div>
-{{ wtf.quick_form(form) }}
-{% endblock %}
+	<meta charset="utf-8">
+
+	<title>Заголовок</title>
+	<meta name="description" content="">
+	<!-- Bootstrap v3.3.4 Grid Styles -->
+	<style>html{font-family:sans-serif;-ms-text-size-adjust:100%;-webkit-text-size-adjust:100%}body{margin:0}article,aside,details,figcaption,figure,footer,header,hgroup,main,menu,nav,section,summary{display:block}audio,canvas,progress,video{display:inline-block;vertical-align:baseline}audio:not([controls]){display:none;height:0}[hidden],template{display:none}a{background-color:transparent}a:active,a:hover{outline:0}abbr[title]{border-bottom:1px dotted}b,strong{font-weight:bold}dfn{font-style:italic}h1{font-size:2em;margin:0.67em 0}mark{background:#ff0;color:#000}small{font-size:80%}sub,sup{font-size:75%;line-height:0;position:relative;vertical-align:baseline}sup{top:-0.5em}sub{bottom:-0.25em}img{border:0}svg:not(:root){overflow:hidden}figure{margin:1em 40px}hr{-moz-box-sizing:content-box;-webkit-box-sizing:content-box;box-sizing:content-box;height:0}pre{overflow:auto}code,kbd,pre,samp{font-family:monospace, monospace;font-size:1em}button,input,optgroup,select,textarea{color:inherit;font:inherit;margin:0}button{overflow:visible}button,select{text-transform:none}button,html input[type="button"],input[type="reset"],input[type="submit"]{-webkit-appearance:button;cursor:pointer}button[disabled],html input[disabled]{cursor:default}button::-moz-focus-inner,input::-moz-focus-inner{border:0;padding:0}input{line-height:normal}input[type="checkbox"],input[type="radio"]{-webkit-box-sizing:border-box;-moz-box-sizing:border-box;box-sizing:border-box;padding:0}input[type="number"]::-webkit-inner-spin-button,input[type="number"]::-webkit-outer-spin-button{height:auto}input[type="search"]{-webkit-appearance:textfield;-moz-box-sizing:content-box;-webkit-box-sizing:content-box;box-sizing:content-box}input[type="search"]::-webkit-search-cancel-button,input[type="search"]::-webkit-search-decoration{-webkit-appearance:none}fieldset{border:1px solid #c0c0c0;margin:0 2px;padding:0.35em 0.625em 0.75em}legend{border:0;padding:0}textarea{overflow:auto}optgroup{font-weight:bold}table{border-collapse:collapse;border-spacing:0}td,th{padding:0}*{-webkit-box-sizing:border-box;-moz-box-sizing:border-box;box-sizing:border-box}*:before,*:after{-webkit-box-sizing:border-box;-moz-box-sizing:border-box;box-sizing:border-box}html{font-size:10px;-webkit-tap-highlight-color:rgba(0,0,0,0)}body{font-family:"Helvetica Neue",Helvetica,Arial,sans-serif;font-size:14px;line-height:1.42857143;color:#333;background-color:#fff}input,button,select,textarea{font-family:inherit;font-size:inherit;line-height:inherit}a{color:#337ab7;text-decoration:none}a:hover,a:focus{color:#23527c;text-decoration:underline}a:focus{outline:thin dotted;outline:5px auto -webkit-focus-ring-color;outline-offset:-2px}figure{margin:0}img{vertical-align:middle}.img-responsive{display:block;max-width:100%;height:auto}.img-rounded{border-radius:6px}.img-thumbnail{padding:4px;line-height:1.42857143;background-color:#fff;border:1px solid #ddd;border-radius:4px;-webkit-transition:all .2s ease-in-out;-o-transition:all .2s ease-in-out;transition:all .2s ease-in-out;display:inline-block;max-width:100%;height:auto}.img-circle{border-radius:50%}hr{margin-top:20px;margin-bottom:20px;border:0;border-top:1px solid #eee}.sr-only{position:absolute;width:1px;height:1px;margin:-1px;padding:0;overflow:hidden;clip:rect(0, 0, 0, 0);border:0}.sr-only-focusable:active,.sr-only-focusable:focus{position:static;width:auto;height:auto;margin:0;overflow:visible;clip:auto}[role="button"]{cursor:pointer}.container{margin-right:auto;margin-left:auto;padding-left:30px;padding-right:30px}@media (min-width:768px){.container{width:750px}}@media (min-width:992px){.container{width:970px}}@media (min-width:1200px){.container{width:1170px}}.container-fluid{margin-right:auto;margin-left:auto;padding-left:15px;padding-right:15px}.row{margin-left:-15px;margin-right:-15px}.col-xs-1, .col-sm-1, .col-md-1, .col-lg-1, .col-xs-2, .col-sm-2, .col-md-2, .col-lg-2, .col-xs-3, .col-sm-3, .col-md-3, .col-lg-3, .col-xs-4, .col-sm-4, .col-md-4, .col-lg-4, .col-xs-5, .col-sm-5, .col-md-5, .col-lg-5, .col-xs-6, .col-sm-6, .col-md-6, .col-lg-6, .col-xs-7, .col-sm-7, .col-md-7, .col-lg-7, .col-xs-8, .col-sm-8, .col-md-8, .col-lg-8, .col-xs-9, .col-sm-9, .col-md-9, .col-lg-9, .col-xs-10, .col-sm-10, .col-md-10, .col-lg-10, .col-xs-11, .col-sm-11, .col-md-11, .col-lg-11, .col-xs-12, .col-sm-12, .col-md-12, .col-lg-12{position:relative;min-height:1px;padding-left:15px;padding-right:15px}.col-xs-1, .col-xs-2, .col-xs-3, .col-xs-4, .col-xs-5, .col-xs-6, .col-xs-7, .col-xs-8, .col-xs-9, .col-xs-10, .col-xs-11, .col-xs-12{float:left}.col-xs-12{width:100%}.col-xs-11{width:91.66666667%}.col-xs-10{width:83.33333333%}.col-xs-9{width:75%}.col-xs-8{width:66.66666667%}.col-xs-7{width:58.33333333%}.col-xs-6{width:50%}.col-xs-5{width:41.66666667%}.col-xs-4{width:33.33333333%}.col-xs-3{width:25%}.col-xs-2{width:16.66666667%}.col-xs-1{width:8.33333333%}.col-xs-pull-12{right:100%}.col-xs-pull-11{right:91.66666667%}.col-xs-pull-10{right:83.33333333%}.col-xs-pull-9{right:75%}.col-xs-pull-8{right:66.66666667%}.col-xs-pull-7{right:58.33333333%}.col-xs-pull-6{right:50%}.col-xs-pull-5{right:41.66666667%}.col-xs-pull-4{right:33.33333333%}.col-xs-pull-3{right:25%}.col-xs-pull-2{right:16.66666667%}.col-xs-pull-1{right:8.33333333%}.col-xs-pull-0{right:auto}.col-xs-push-12{left:100%}.col-xs-push-11{left:91.66666667%}.col-xs-push-10{left:83.33333333%}.col-xs-push-9{left:75%}.col-xs-push-8{left:66.66666667%}.col-xs-push-7{left:58.33333333%}.col-xs-push-6{left:50%}.col-xs-push-5{left:41.66666667%}.col-xs-push-4{left:33.33333333%}.col-xs-push-3{left:25%}.col-xs-push-2{left:16.66666667%}.col-xs-push-1{left:8.33333333%}.col-xs-push-0{left:auto}.col-xs-offset-12{margin-left:100%}.col-xs-offset-11{margin-left:91.66666667%}.col-xs-offset-10{margin-left:83.33333333%}.col-xs-offset-9{margin-left:75%}.col-xs-offset-8{margin-left:66.66666667%}.col-xs-offset-7{margin-left:58.33333333%}.col-xs-offset-6{margin-left:50%}.col-xs-offset-5{margin-left:41.66666667%}.col-xs-offset-4{margin-left:33.33333333%}.col-xs-offset-3{margin-left:25%}.col-xs-offset-2{margin-left:16.66666667%}.col-xs-offset-1{margin-left:8.33333333%}.col-xs-offset-0{margin-left:0}@media (min-width:768px){.col-sm-1, .col-sm-2, .col-sm-3, .col-sm-4, .col-sm-5, .col-sm-6, .col-sm-7, .col-sm-8, .col-sm-9, .col-sm-10, .col-sm-11, .col-sm-12{float:left}.col-sm-12{width:100%}.col-sm-11{width:91.66666667%}.col-sm-10{width:83.33333333%}.col-sm-9{width:75%}.col-sm-8{width:66.66666667%}.col-sm-7{width:58.33333333%}.col-sm-6{width:50%}.col-sm-5{width:41.66666667%}.col-sm-4{width:33.33333333%}.col-sm-3{width:25%}.col-sm-2{width:16.66666667%}.col-sm-1{width:8.33333333%}.col-sm-pull-12{right:100%}.col-sm-pull-11{right:91.66666667%}.col-sm-pull-10{right:83.33333333%}.col-sm-pull-9{right:75%}.col-sm-pull-8{right:66.66666667%}.col-sm-pull-7{right:58.33333333%}.col-sm-pull-6{right:50%}.col-sm-pull-5{right:41.66666667%}.col-sm-pull-4{right:33.33333333%}.col-sm-pull-3{right:25%}.col-sm-pull-2{right:16.66666667%}.col-sm-pull-1{right:8.33333333%}.col-sm-pull-0{right:auto}.col-sm-push-12{left:100%}.col-sm-push-11{left:91.66666667%}.col-sm-push-10{left:83.33333333%}.col-sm-push-9{left:75%}.col-sm-push-8{left:66.66666667%}.col-sm-push-7{left:58.33333333%}.col-sm-push-6{left:50%}.col-sm-push-5{left:41.66666667%}.col-sm-push-4{left:33.33333333%}.col-sm-push-3{left:25%}.col-sm-push-2{left:16.66666667%}.col-sm-push-1{left:8.33333333%}.col-sm-push-0{left:auto}.col-sm-offset-12{margin-left:100%}.col-sm-offset-11{margin-left:91.66666667%}.col-sm-offset-10{margin-left:83.33333333%}.col-sm-offset-9{margin-left:75%}.col-sm-offset-8{margin-left:66.66666667%}.col-sm-offset-7{margin-left:58.33333333%}.col-sm-offset-6{margin-left:50%}.col-sm-offset-5{margin-left:41.66666667%}.col-sm-offset-4{margin-left:33.33333333%}.col-sm-offset-3{margin-left:25%}.col-sm-offset-2{margin-left:16.66666667%}.col-sm-offset-1{margin-left:8.33333333%}.col-sm-offset-0{margin-left:0}}@media (min-width:992px){.col-md-1, .col-md-2, .col-md-3, .col-md-4, .col-md-5, .col-md-6, .col-md-7, .col-md-8, .col-md-9, .col-md-10, .col-md-11, .col-md-12{float:left}.col-md-12{width:100%}.col-md-11{width:91.66666667%}.col-md-10{width:83.33333333%}.col-md-9{width:75%}.col-md-8{width:66.66666667%}.col-md-7{width:58.33333333%}.col-md-6{width:50%}.col-md-5{width:41.66666667%}.col-md-4{width:33.33333333%}.col-md-3{width:25%}.col-md-2{width:16.66666667%}.col-md-1{width:8.33333333%}.col-md-pull-12{right:100%}.col-md-pull-11{right:91.66666667%}.col-md-pull-10{right:83.33333333%}.col-md-pull-9{right:75%}.col-md-pull-8{right:66.66666667%}.col-md-pull-7{right:58.33333333%}.col-md-pull-6{right:50%}.col-md-pull-5{right:41.66666667%}.col-md-pull-4{right:33.33333333%}.col-md-pull-3{right:25%}.col-md-pull-2{right:16.66666667%}.col-md-pull-1{right:8.33333333%}.col-md-pull-0{right:auto}.col-md-push-12{left:100%}.col-md-push-11{left:91.66666667%}.col-md-push-10{left:83.33333333%}.col-md-push-9{left:75%}.col-md-push-8{left:66.66666667%}.col-md-push-7{left:58.33333333%}.col-md-push-6{left:50%}.col-md-push-5{left:41.66666667%}.col-md-push-4{left:33.33333333%}.col-md-push-3{left:25%}.col-md-push-2{left:16.66666667%}.col-md-push-1{left:8.33333333%}.col-md-push-0{left:auto}.col-md-offset-12{margin-left:100%}.col-md-offset-11{margin-left:91.66666667%}.col-md-offset-10{margin-left:83.33333333%}.col-md-offset-9{margin-left:75%}.col-md-offset-8{margin-left:66.66666667%}.col-md-offset-7{margin-left:58.33333333%}.col-md-offset-6{margin-left:50%}.col-md-offset-5{margin-left:41.66666667%}.col-md-offset-4{margin-left:33.33333333%}.col-md-offset-3{margin-left:25%}.col-md-offset-2{margin-left:16.66666667%}.col-md-offset-1{margin-left:8.33333333%}.col-md-offset-0{margin-left:0}}@media (min-width:1200px){.col-lg-1, .col-lg-2, .col-lg-3, .col-lg-4, .col-lg-5, .col-lg-6, .col-lg-7, .col-lg-8, .col-lg-9, .col-lg-10, .col-lg-11, .col-lg-12{float:left}.col-lg-12{width:100%}.col-lg-11{width:91.66666667%}.col-lg-10{width:83.33333333%}.col-lg-9{width:75%}.col-lg-8{width:66.66666667%}.col-lg-7{width:58.33333333%}.col-lg-6{width:50%}.col-lg-5{width:41.66666667%}.col-lg-4{width:33.33333333%}.col-lg-3{width:25%}.col-lg-2{width:16.66666667%}.col-lg-1{width:8.33333333%}.col-lg-pull-12{right:100%}.col-lg-pull-11{right:91.66666667%}.col-lg-pull-10{right:83.33333333%}.col-lg-pull-9{right:75%}.col-lg-pull-8{right:66.66666667%}.col-lg-pull-7{right:58.33333333%}.col-lg-pull-6{right:50%}.col-lg-pull-5{right:41.66666667%}.col-lg-pull-4{right:33.33333333%}.col-lg-pull-3{right:25%}.col-lg-pull-2{right:16.66666667%}.col-lg-pull-1{right:8.33333333%}.col-lg-pull-0{right:auto}.col-lg-push-12{left:100%}.col-lg-push-11{left:91.66666667%}.col-lg-push-10{left:83.33333333%}.col-lg-push-9{left:75%}.col-lg-push-8{left:66.66666667%}.col-lg-push-7{left:58.33333333%}.col-lg-push-6{left:50%}.col-lg-push-5{left:41.66666667%}.col-lg-push-4{left:33.33333333%}.col-lg-push-3{left:25%}.col-lg-push-2{left:16.66666667%}.col-lg-push-1{left:8.33333333%}.col-lg-push-0{left:auto}.col-lg-offset-12{margin-left:100%}.col-lg-offset-11{margin-left:91.66666667%}.col-lg-offset-10{margin-left:83.33333333%}.col-lg-offset-9{margin-left:75%}.col-lg-offset-8{margin-left:66.66666667%}.col-lg-offset-7{margin-left:58.33333333%}.col-lg-offset-6{margin-left:50%}.col-lg-offset-5{margin-left:41.66666667%}.col-lg-offset-4{margin-left:33.33333333%}.col-lg-offset-3{margin-left:25%}.col-lg-offset-2{margin-left:16.66666667%}.col-lg-offset-1{margin-left:8.33333333%}.col-lg-offset-0{margin-left:0}}.clearfix:before,.clearfix:after,.container:before,.container:after,.container-fluid:before,.container-fluid:after,.row:before,.row:after{content:" ";display:table}.clearfix:after,.container:after,.container-fluid:after,.row:after{clear:both}.center-block{display:block;margin-left:auto;margin-right:auto}.pull-right{float:right !important}.pull-left{float:left !important}.hide{display:none !important}.show{display:block !important}.invisible{visibility:hidden}.text-hide{font:0/0 a;color:transparent;text-shadow:none;background-color:transparent;border:0}.hidden{display:none !important}.affix{position:fixed}@-ms-viewport{width:device-width}.visible-xs,.visible-sm,.visible-md,.visible-lg{display:none !important}.visible-xs-block,.visible-xs-inline,.visible-xs-inline-block,.visible-sm-block,.visible-sm-inline,.visible-sm-inline-block,.visible-md-block,.visible-md-inline,.visible-md-inline-block,.visible-lg-block,.visible-lg-inline,.visible-lg-inline-block{display:none !important}@media (max-width:767px){.visible-xs{display:block !important}table.visible-xs{display:table}tr.visible-xs{display:table-row !important}th.visible-xs,td.visible-xs{display:table-cell !important}}@media (max-width:767px){.visible-xs-block{display:block !important}}@media (max-width:767px){.visible-xs-inline{display:inline !important}}@media (max-width:767px){.visible-xs-inline-block{display:inline-block !important}}@media (min-width:768px) and (max-width:991px){.visible-sm{display:block !important}table.visible-sm{display:table}tr.visible-sm{display:table-row !important}th.visible-sm,td.visible-sm{display:table-cell !important}}@media (min-width:768px) and (max-width:991px){.visible-sm-block{display:block !important}}@media (min-width:768px) and (max-width:991px){.visible-sm-inline{display:inline !important}}@media (min-width:768px) and (max-width:991px){.visible-sm-inline-block{display:inline-block !important}}@media (min-width:992px) and (max-width:1199px){.visible-md{display:block !important}table.visible-md{display:table}tr.visible-md{display:table-row !important}th.visible-md,td.visible-md{display:table-cell !important}}@media (min-width:992px) and (max-width:1199px){.visible-md-block{display:block !important}}@media (min-width:992px) and (max-width:1199px){.visible-md-inline{display:inline !important}}@media (min-width:992px) and (max-width:1199px){.visible-md-inline-block{display:inline-block !important}}@media (min-width:1200px){.visible-lg{display:block !important}table.visible-lg{display:table}tr.visible-lg{display:table-row !important}th.visible-lg,td.visible-lg{display:table-cell !important}}@media (min-width:1200px){.visible-lg-block{display:block !important}}@media (min-width:1200px){.visible-lg-inline{display:inline !important}}@media (min-width:1200px){.visible-lg-inline-block{display:inline-block !important}}@media (max-width:767px){.hidden-xs{display:none !important}}@media (min-width:768px) and (max-width:991px){.hidden-sm{display:none !important}}@media (min-width:992px) and (max-width:1199px){.hidden-md{display:none !important}}@media (min-width:1200px){.hidden-lg{display:none !important}}.visible-print{display:none !important}@media print{.visible-print{display:block !important}table.visible-print{display:table}tr.visible-print{display:table-row !important}th.visible-print,td.visible-print{display:table-cell !important}}.visible-print-block{display:none !important}@media print{.visible-print-block{display:block !important}}.visible-print-inline{display:none !important}@media print{.visible-print-inline{display:inline !important}}.visible-print-inline-block{display:none !important}@media print{.visible-print-inline-block{display:inline-block !important}}@media print{.hidden-print{display:none !important}}</style>
+
+	<!-- Header CSS (First Sections of Website: paste after release from _header.min.css here) -->
+	<style></style>
+
+	<!-- Load Main CSS Compilled without JS -->
+	<noscript>
+		<link rel="stylesheet" href="_main.min.css">
+	</noscript>
+
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+	<link rel="shortcut icon" href="{{ url_for('static', filename='img/favicon/favicon.ico') }}" type="image/x-icon">
+	<link rel="apple-touch-icon" href="{{ url_for('static', filename='img/favicon/apple-touch-icon.png') }}">
+	<link rel="apple-touch-icon" sizes="72x72" href="{{ url_for('static', filename='img/favicon/apple-touch-icon-72x72.png') }}">
+	<link rel="apple-touch-icon" sizes="114x114" href="{{ url_for('static', filename='img/favicon/apple-touch-icon-114x114.png') }}">
+</head>
+
+<body>
+	<div class="toggle-menu-box">
+		<div class="toggle-menu-box-image-wrapper">
+			<img src="{{ url_for('static', filename='img/dnl-green-logo.png') }}" alt="">
+		</div>
+		<nav>
+			<ul>
+				<li><a href="#rate">Rate Generation</a></li>
+				<li><a href="#auto-call">Test Route</a></li>
+				<li><a href="#reconcilation">CDR Reconcilation</a></li>
+				<li><a href="#">LRN API </a></li>
+				<li><a href="#contact-section">Contact us</a></li>
+			</ul>
+			<span class="tittle-of-point">Download <span class="uppercase">Free</span><br>
+				  <span class="fz-16px">DNL High Performance Switch</span>
+			</span>
+		</nav>
+		<button>Download</button>
+	</div>
+	<header class="is-home">
+		<div class="top-mnu">
+			<div class="container">
+				<div class="row">
+					<div class="col-md-9">
+						<div class="top-mnu-items">
+							<span>Enter process ID to check the the result</span>
+							<ul>
+								<li><input type="text" placeholder="Process ID"></li><span class="br hidden-sm hidden-lg hidden-md"><br></span>
+								<li><input type="submit" value="Check Result"></li>
+							</ul>
+						</div>
+					</div>
+					<div class="col-sm-12 col-md-3">
+						<a href="#" class="toggle-mnu"><span></span></a>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="header-content">
+			<div class="container">
+				<div class="row">
+					<div class="col-md-6">
+						<div class="header-content-left">
+							<div class="logo">
+								<img src="{{ url_for('static', filename='img/logo.png') }}" alt="Image">
+							</div>
+							<h1>opening these features<br>
+								as a <span>FREE</span> cloud services<br>
+							</h1>
+							<h2>
+								is our way of contributing <br>
+								back to the industry<br>
+							</h2>
+							<a href="#try-now" class="try-now"><span>Try now</span><br><img src="{{ url_for('static', filename='img/arrow-down.png') }}" alt="Image"></a>
+						</div>
+					</div>
+					<div class="col-md-6">
+						<div class="header-picture-wrapper hidden-sm hidden-xs">
+							<img src="{{ url_for('static', filename='img/header-picture.png') }}" alt="Image">
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</header>
+	<section id="try-now" class="first-third-service">
+		<div class="container">
+			<div class="row">
+				<div class="col-md-5">
+					<div class="first-third-service-picture-wrapper">
+						<img src="{{ url_for('static', filename='img/first-service-picture.png') }}" alt="Image">
+					</div>
+				</div>
+				<div class="col-md-7">
+					<div class="first-third-service-right">
+						<h3>Rate generation</h3>
+						<p>
+							Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce posuere<br> turpis et tortor ultricies pellentesque. Phasellus et mauris pulvinar,<br> porta nibh eu, pulvinar ligula.
+						</p>
+						<a href="#rate" class="button">Try Now</a>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+	<section class="second-fourth-service">
+		<div class="container">
+			<div class="row">
+				<div class="col-md-7">
+					<div class="second-fourth-service-left">
+						<h3>Test Route</h3>
+						<p>
+							Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce posuere<br> turpis et tortor ultricies pellentesque. Phasellus et mauris pulvinar,<br> porta nibh eu, pulvinar ligula.
+						</p>
+						<a href="#manual" class="button">Manual Calls</a>
+						<a href="#auto-call" class="button">Auto Calls</a>
+					</div>
+				</div>
+				<div class="col-md-5">
+					<div class="second-fourth-service-wrapper">
+						<img src="{{ url_for('static', filename='img/second-service-picture.png') }}" alt="Image">
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+	<section class="first-third-service">
+		<div class="container">
+			<div class="row">
+				<div class="col-md-5">
+					<div class="first-third-service-picture-wrapper third-service-picture-wrapper">
+						<img src="{{ url_for('static', filename='img/third-service-picture.png') }}" alt="Image">
+					</div>
+				</div>
+				<div class="col-md-7">
+					<div class="first-third-service-right third-service-right">
+						<h3>CDR Reconcilation</h3>
+						<p>
+							Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce posuere<br> turpis et tortor ultricies pellentesque. Phasellus et mauris pulvinar,<br> porta nibh eu, pulvinar ligula.
+						</p>
+						<a href="#reconcilation" class="button">Try Now</a>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+	<section class="second-fourth-service fourth-service">
+		<div class="container">
+			<div class="row">
+				<div class="col-md-7">
+					<div class="second-fourth-service-left fourth-service-left">
+						<h3>LRN API</h3>
+						<p>
+							Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce posuere<br> turpis et tortor ultricies pellentesque. Phasellus et mauris pulvinar,<br> porta nibh eu, pulvinar ligula.
+						</p>
+						<a href="#" class="button">Try Now</a>
+					</div>
+				</div>
+				<div class="col-md-5">
+					<div class="second-fourth-service-wrapper fourth-service-wrapper">
+						<img src="{{ url_for('static', filename='img/fourth-service-picture.png') }}" alt="Image">
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+	<section id="contact-section" class="contact-form">
+		<div class="container">
+			<div class="row">
+				<div class="col-md-6">
+					<div class="contact-form-picture-wrapper">
+						<img src="{{ url_for('static', filename='img/contact-form-picture.png') }}" alt="Image">
+					</div>
+				</div>
+				<div class="col-md-6">
+					<div class="contact-form-right">
+						<h2>Contact Us</h2>
+						<label for="name">Name</label><br>
+						<input type="text" id="name"><br>
+						<label for="e-mail">Email</label><br>
+						<input type="e-mail" id="e-mail"><br>
+						<label for="message">Message</label><br>
+						<textarea id="message"></textarea>
+						<input type="submit" value="Send" class="button"><br>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+	<section class="subscribe-download-section">
+		<div class="container">
+			<div class="row">
+				<div class="col-md-6">
+					<div class="subscribe-download-section-left-wrapper">
+						<div class="subscribe-download-section-picture-left-wrapper">
+							<img src="{{ url_for('static', filename='img/subscribe-download-section-picture-left.png') }}" alt="Image">
+						</div>
+						<h4 class="download">
+							Download Free DNL<br>
+							High Performance Switch
+						</h4>
+						<button class="download-button">Download</button>
+					</div>
+				</div>
+				<div class="col-md-6">
+					<div class="subscribe-download-section-picture-right-wrapper">
+						<img src="{{ url_for('static', filename='img/subscribe-download-section-picture-right.png') }}" alt="Image">
+					</div>
+					<h4 class="subscribe">
+						Subscribe<br>
+						to hosted switch
+					</h4>
+					<button class="subscribe-button">Subscribe</button>
+				</div>
+			</div>
+		</div>
+	</section>
+	<section id="reconcilation" class="service-step-1-section cdr-1 cdr">
+		<div class="container">
+			<div class="row">
+				<div class="col-md-12">
+					<ul>
+						<li>
+							<div class="step-with-arrow">
+								Step 1
+							</div>
+						</li>
+						<li>
+							<div class="step-without-arrow nth-step">
+								Step 2
+							</div>
+						</li>
+						<li>
+							<div class="step-without-arrow">
+								Step 3
+							</div>
+						</li>
+					</ul>
+				</div>
+				<div class="service-content-wrapper">
+					<span>Type of CDR to Compare</span>
+					<ul class="radio-button">
+						<li>
+							<input type="radio" id="radio-button1" name="cdr-type">
+							<label for="radio-button1">US JD (with LRN)</label>
+						</li>
+						<li>
+							<input type="radio" id="radio-button2" name="cdr-type">
+							<label for="radio-button2">US JD (without LRN)</label>
+						</li>
+						<li>
+							<input type="radio" id="radio-button3" name="cdr-type">
+							<label for="radio-button3">A-Z Rate Deck</label>
+						</li>
+					</ul>
+					<span class="title-of-upload">Please upload the two CDR files to compare:</span>
+					<div class="upload-box">
+					</div>
+					<div class="upload-box">
+					</div>
+					<button class="cdr-back"><i class="fa fa-angle-left" aria-hidden="true"></i> Back</button>
+					<button class="cdr-next">Next <i class="fa fa-angle-right" aria-hidden="true"></i></button>
+				</div>
+			</div>
+		</div>
+	</section>
+	<section class="service-step-1-section service-step-2-section cdr-2">
+		<div class="container">
+			<div class="row">
+				<div class="col-md-12">
+					<span class="tittle-of-point first-point-header">For A-Z CDR</span>
+					<ul>
+						<li>
+							<div class="step-without-arrow">
+								Step 1
+							</div>
+						</li>
+						<li>
+							<div class="step-with-arrow">
+								Step 2
+							</div>
+						</li>
+						<li>
+							<div class="step-without-arrow nth-step">
+								Step 3
+							</div>
+						</li>
+					</ul>
+
+					<div class="service-content-wrapper-step-2">
+						<span class="tittle-of-point first-table-header">File ABC.csv</span>
+						<table>
+							<tr>
+								<th>
+									<div class="select-wrapper">
+										<select class="select">
+												<option class="hidden">Call ID ▾</option>
+												<option>DNIS</option>
+												<option>Cost</option>
+										</select>
+									</div>
+								</th>
+								<th>
+									<div class="select-wrapper">
+										<select class="select">
+												<option class="hidden">ANI ▾</option>
+												<option>DNIS</option>
+												<option>Cost</option>
+										</select>
+									</div>
+								</th>
+								<th>
+									<div class="select-wrapper">
+										<select class="select">
+												<option class="hidden">DNIS ▾</option>
+												<option>DNIS</option>
+												<option>Cost</option>
+										</select>
+									</div>
+								</th>
+								<th>
+									<div class="select-wrapper">
+										<select class="select">
+												<option class="hidden">Cost ▾</option>
+												<option>DNIS</option>
+												<option>Cost</option>
+										</select>
+									</div>
+								</th>
+								<th>
+									<div class="select-wrapper">
+										<select class="select">
+												<option class="hidden">Rate ▾</option>
+												<option>DNIS</option>
+												<option>Cost</option>
+										</select>
+									</div>
+								</th>
+								<th>
+									<div class="select-wrapper">
+										<select class="select">
+												<option class="hidden">Duration ▾</option>
+												<option>DNIS</option>
+												<option>Cost</option>
+										</select>
+									</div>
+								</th>
+							</tr>
+							<tr>
+								<th></th>
+								<th></th>
+								<th></th>
+								<th></th>
+								<th></th>
+								<th></th>
+							</tr>
+							<tr class="third-line">
+								<th></th>
+								<th></th>
+								<th></th>
+								<th></th>
+								<th></th>
+								<th></th>
+							</tr>
+							<tr>
+								<th></th>
+								<th></th>
+								<th></th>
+								<th></th>
+								<th></th>
+								<th></th>
+							</tr>
+						</table>
+						<span class="tittle-of-point second-table-header">File BBB.csv</span>
+						<table>
+							<tr>
+								<th>
+									<div class="select-wrapper">
+										<select class="select">
+												<option class="hidden">Call ID ▾</option>
+												<option>DNIS</option>
+												<option>Cost</option>
+										</select>
+									</div>
+								</th>
+								<th>
+									<div class="select-wrapper">
+										<select class="select">
+												<option class="hidden">ANI ▾</option>
+												<option>DNIS</option>
+												<option>Cost</option>
+										</select>
+									</div>
+								</th>
+								<th>
+									<div class="select-wrapper">
+										<select class="select">
+												<option class="hidden">DNIS ▾</option>
+												<option>DNIS</option>
+												<option>Cost</option>
+										</select>
+									</div>
+								</th>
+								<th>
+									<div class="select-wrapper">
+										<select class="select">
+												<option class="hidden">Cost ▾</option>
+												<option>DNIS</option>
+												<option>Cost</option>
+										</select>
+									</div>
+								</th>
+								<th>
+									<div class="select-wrapper">
+										<select class="select">
+												<option class="hidden">Rate ▾</option>
+												<option>DNIS</option>
+												<option>Cost</option>
+										</select>
+									</div>
+								</th>
+								<th>
+									<div class="select-wrapper">
+										<select class="select">
+												<option class="hidden">Duration ▾</option>
+												<option>DNIS</option>
+												<option>Cost</option>
+										</select>
+									</div>
+								</th>
+							</tr>
+							<tr>
+								<th></th>
+								<th></th>
+								<th></th>
+								<th></th>
+								<th></th>
+								<th></th>
+							</tr>
+							<tr class="third-line">
+								<th></th>
+								<th></th>
+								<th></th>
+								<th></th>
+								<th></th>
+								<th></th>
+							</tr>
+							<tr>
+								<th></th>
+								<th></th>
+								<th></th>
+								<th></th>
+								<th></th>
+								<th></th>
+							</tr>
+						</table>
+						<button class="cdr-back"><i class="fa fa-angle-left" aria-hidden="true"></i> Back</button>
+						<button class="cdr-next">Next <i class="fa fa-angle-right" aria-hidden="true"></i></button>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+	<section class="service-step-2-section cdr-2-for-jd">
+		<div class="container">
+			<div class="row">
+				<div class="col-md-12">
+					<span class="tittle-of-point For-US-JD-CDR">For US JD CDR</span>
+					<ul>
+						<li>
+							<div class="step-without-arrow">
+								Step 1
+							</div>
+						</li>
+						<li>
+							<div class="step-with-arrow">
+								Step 2
+							</div>
+						</li>
+						<li>
+							<div class="step-without-arrow nth-step">
+								Step 3
+							</div>
+						</li>
+					</ul>
+					<div class="service-content-wrapper-step-2">
+						<span class="tittle-of-point first-table-header">File ABC.csv</span>
+						<table>
+							<tr>
+								<th>
+									<div class="select-wrapper">
+										<select class="select">
+												<option class="hidden">Call ID ▾</option>
+												<option>DNIS</option>
+												<option>Cost</option>
+										</select>
+									</div>
+								</th>
+								<th>
+									<div class="select-wrapper">
+										<select class="select">
+												<option class="hidden">ANI ▾</option>
+												<option>DNIS</option>
+												<option>Cost</option>
+										</select>
+									</div>
+								</th>
+								<th>
+									<div class="select-wrapper">
+										<select class="select">
+												<option class="hidden">DNIS ▾</option>
+												<option>DNIS</option>
+												<option>Cost</option>
+										</select>
+									</div>
+								</th>
+								<th>
+									<div class="select-wrapper">
+										<select class="select">
+												<option class="hidden">LRN ▾</option>
+												<option>DNIS</option>
+												<option>Cost</option>
+										</select>
+									</div>
+								</th>
+								<th>
+									<div class="select-wrapper">
+										<select class="select">
+												<option class="hidden">Cost ▾</option>
+												<option>DNIS</option>
+												<option>Cost</option>
+										</select>
+									</div>
+								</th>
+								<th>
+									<div class="select-wrapper">
+										<select class="select">
+												<option class="hidden">Rate ▾</option>
+												<option>DNIS</option>
+												<option>Cost</option>
+										</select>
+									</div>
+								</th>
+								<th>
+									<div class="select-wrapper">
+										<select class="select">
+												<option class="hidden">Duration ▾</option>
+												<option>DNIS</option>
+												<option>Cost</option>
+										</select>
+									</div>
+								</th>
+							</tr>
+							<tr>
+								<th></th>
+								<th></th>
+								<th></th>
+								<th></th>
+								<th></th>
+								<th></th>
+								<th></th>
+							</tr>
+							<tr class="third-line">
+								<th></th>
+								<th></th>
+								<th></th>
+								<th></th>
+								<th></th>
+								<th></th>
+								<th></th>
+							</tr>
+							<tr>
+								<th></th>
+								<th></th>
+								<th></th>
+								<th></th>
+								<th></th>
+								<th></th>
+								<th></th>
+							</tr>
+						</table>
+						<span class="tittle-of-point second-table-header">File BBB.csv</span>
+						<table>
+							<tr>
+								<th>
+									<div class="select-wrapper">
+										<select class="select">
+												<option class="hidden">Call ID ▾</option>
+												<option>DNIS</option>
+												<option>Cost</option>
+										</select>
+									</div>
+								</th>
+								<th>
+									<div class="select-wrapper">
+										<select class="select">
+												<option class="hidden">ANI ▾</option>
+												<option>DNIS</option>
+												<option>Cost</option>
+										</select>
+									</div>
+								</th>
+								<th>
+									<div class="select-wrapper">
+										<select class="select">
+												<option class="hidden">DNIS ▾</option>
+												<option>DNIS</option>
+												<option>Cost</option>
+										</select>
+									</div>
+								</th>
+								<th>
+									<div class="select-wrapper">
+										<select class="select">
+												<option class="hidden">LRN ▾</option>
+												<option>DNIS</option>
+												<option>Cost</option>
+										</select>
+									</div>
+								</th>
+								<th>
+									<div class="select-wrapper">
+										<select class="select">
+												<option class="hidden">Cost ▾</option>
+												<option>DNIS</option>
+												<option>Cost</option>
+										</select>
+									</div>
+								</th>
+								<th>
+									<div class="select-wrapper">
+										<select class="select">
+												<option class="hidden">Rate ▾</option>
+												<option>DNIS</option>
+												<option>Cost</option>
+										</select>
+									</div>
+								</th>
+								<th>
+									<div class="select-wrapper">
+										<select class="select">
+												<option class="hidden">Duration ▾</option>
+												<option class="hidden">DNIS</option>
+												<option class="hidden">Cost</option>
+										</select>
+									</div>
+								</th>
+							</tr>
+							<tr>
+								<th></th>
+								<th></th>
+								<th></th>
+								<th></th>
+								<th></th>
+								<th></th>
+								<th></th>
+							</tr>
+							<tr class="third-line">
+								<th></th>
+								<th></th>
+								<th></th>
+								<th></th>
+								<th></th>
+								<th></th>
+								<th></th>
+							</tr>
+							<tr>
+								<th></th>
+								<th></th>
+								<th></th>
+								<th></th>
+								<th></th>
+								<th></th>
+								<th></th>
+							</tr>
+						</table>
+						<button class="cdr-back"><i class="fa fa-angle-left" aria-hidden="true"></i> Back</button>
+						<button class="cdr-next">Next <i class="fa fa-angle-right" aria-hidden="true"></i></button>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+	<section class="fill-forms-section cdr-3">
+		<div class="container">
+
+			<ul>
+				<li>
+					<div class="step-without-arrow step-1">
+						Step 1
+					</div>
+				</li>
+				<li>
+					<div class="step-without-arrow">
+						Step 2
+					</div>
+				</li>
+				<li>
+					<div class="step-with-arrow">
+						Step 3
+					</div>
+				</li>
+			</ul>
+			<div class="col-md-12">
+				<div class="service-content-wrapper-step-3">
+					<form action="">
+						<span class="tittle-of-point">When your result generated, we will email to the following address:</span><br>
+						<label for="from">From</label><br>
+						<input id="from" type="e-mail" placeholder="john@jgraph.com"><br>
+						<label for="subject">Subject</label><br>
+						<input id="subject" type="text" placeholder="Greeting"><br>
+						<label for="To">To</label><br>
+						<input id="To" type="text" placeholder="fred@jgraph.com"><br>
+						<label for="CC">CC</label><br>
+						<input id="CC" type="text"><br>
+						<label for="BCC">BCC</label><br>
+						<input id="BCC" type="text">
+						<textarea>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut lacus dui, tempor quis tristique in, porttitor placerat justo. Aliquam vitae diam metus. Mauris egestas metus eros. Mauris a ipsum at dui condimentum congue. Donec sit amet tincidunt mi. Nulla ac arcu nulla. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Nunc volutpat id risus id pretium. Donec vitae</textarea>
+						<div class="checkbox-wrapper">
+							<label for="checkbox"><input type="checkbox" id="checkbox"> When done, send notification to</label>
+							<select class="type-of-notification">
+								<option value=""></option>
+								<option value=""></option>
+								<option value=""></option>
+							</select>
+						</div>
+						<span class="tittle-of-point check-status">Check Status for this task http://denovolab.io/JFKJDMDM</span><br>
+						<div class="button-wrapper">
+							<button class="cdr-back"><i class="fa fa-angle-left" aria-hidden="true"></i> Back</button>
+							<button>Finish <i class="fa fa-check" aria-hidden="true"></i></button>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+	</section>
+	<section class="cdr-comparison">
+		<div class="container">
+			<div class="row">
+				<div class="col-md-12">
+					<div class="cdr-comparison-header">
+						<span>CDR Comparison Result</span>
+					</div>
+					<div class="button-and-span-wrapper">
+						<span class="tittle-of-point">Job ID: XXXXXX</span>
+						<div class="button-wrapper">
+							<button class="email-share">Email Share</button>
+							<button>Share Result</button>
+						</div>
+					</div>
+				</div>
+			</div>
+			<table class="first-table">
+				<tr>
+					<th>Client Name</th>
+					<th>Create On</th>
+					<th>Completed Time</th>
+					<th class="compare-type">Compare Type</th>
+					<th class="source-filename">Source Filename</th>
+					<th>Diff Filename</th>
+				</tr>
+				<tr>
+					<th>Teleinx</th>
+					<th>2017-01-12<br>01:29:33+00</th>
+					<th>2017-01-12<br>01:32:07+00</th>
+					<th>US LRN<br>Non-Jurisdiction</th>
+					<th>combinedfi</th>
+					<th>combinedfi</th>
+				</tr>
+			</table>
+			<span class="result tittle-of-point">Result</span>
+			<ul class="download-list">
+				<div class="row">
+					<div class="col-md-2">
+						<li class="li-download"><a href="img/excel-icon.png" download><img src="{{url_for('static', filename='img/excel-icon.png') }}" alt="Image"><span class="download-span">Download<br>Mathed CDRs</span></a></li>
+					</div>
+					<div class="col-md-2">
+						<li class="li-download"><a href="#" download><img src="{{url_for('static', filename='img/excel-icon.png') }}" alt="Image"><span class="download-span">Download<br>Unmathed CDRs</span></a></li>
+					</div>
+					<div class="col-md-2">
+						<li class="li-download"><a href="#" download><img src="{{url_for('static', filename='img/excel-icon.png') }}" alt="Image"><span class="download-span">Download<br>Line-By-Line<br>Comparison</span></a></li>
+					</div>
+					<div class="col-md-2">
+						<li class="li-download"><a href="#" download><img src="{{url_for('static', filename='img/excel-icon.png') }}" alt="Image"><span class="download-span">Download<br>Comparison<br>Summary</span></a></li>
+					</div>
+				</div>
+			</ul>
+			<table class="last-table-cdr">
+				<tr class="first-row-table-cdr">
+					<th></th>
+					<th>Source File</th>
+					<th>Diff File</th>
+					<th>Difference</th>
+					<th>%Diff</th>
+				</tr>
+				<tr>
+					<th class="first-column-table-cdr">CDR Counts</th>
+					<th>327891</th>
+					<th>327891</th>
+					<th class="fourth-column-table">327891</th>
+					<th>327891</th>
+				</tr>
+				<tr class="gray-row">
+					<th class="first-column-table-cdr">Non-Zero CDR Counts</th>
+					<th>327891</th>
+					<th>327891</th>
+					<th class="fourth-column-table">327891</th>
+					<th>327891</th>
+				</tr>
+				<tr>
+					<th class="first-column-table-cdr">Total Duraton</th>
+					<th>327891</th>
+					<th>327891</th>
+					<th class="fourth-column-table">327891</th>
+					<th>327891</th>
+				</tr>
+				<tr>
+					<th class="first-column-table-cdr">Cost</th>
+					<th>327891</th>
+					<th>327891</th>
+					<th class="fourth-column-table">327891</th>
+					<th>327891</th>
+				</tr>
+				<tr class="gray-row">
+					<th class="first-column-table-cdr">Avg Rate</th>
+					<th>327891</th>
+					<th>327891</th>
+					<th class="fourth-column-table">327891</th>
+					<th>327891</th>
+				</tr>
+				<tr>
+					<th class="first-column-table-cdr">Mismatched Count</th>
+					<th>327891</th>
+					<th>327891</th>
+					<th class="fourth-column-table">327891</th>
+					<th>327891</th>
+				</tr>
+				<tr class="gray-row">
+					<th class="first-column-table-cdr">matched CDR Count</th>
+					<th>327891</th>
+					<th>327891</th>
+					<th class="fourth-column-table">327891</th>
+					<th>327891</th>
+				</tr>
+			</table>
+		</div>
+	</section>
+		<section id="rate" class="service-step-1-section rate-genaration">
+		<div class="container">
+			<div class="row">
+				<div class="col-md-12">
+					<ul>
+						<li>
+							<div class="step-with-arrow">
+								Step 1
+							</div>
+						</li>
+						<li>
+							<div class="step-without-arrow nth-step">
+								Step 2
+							</div>
+						</li>
+						<li>
+							<div class="step-without-arrow">
+								Step 3
+							</div>
+						</li>
+					</ul>
+				</div>
+				<div class="service-content-wrapper">
+					<span>Type of Rate</span>
+					<ul class="radio-button">
+						<li>
+							<input type="radio" id="radio-button1" name="cdr-type">
+							<label for="radio-button1">US JD Rate Deck</label>
+						</li>
+						<li>
+							<input type="radio" class="rate-genaration-checkbox" id="radio-button2" name="cdr-type">
+							<label for="radio-button2">A-Z Rate Deck</label>
+						</li>
+					</ul>
+					<span class="title-of-upload">Please upload the two files to compare:</span>
+					<div class="upload-box">
+					</div>
+					<div class="upload-box">
+					</div>
+					<button><i class="fa fa-angle-left" aria-hidden="true"></i> Back</button>
+					<button>Next <i class="fa fa-angle-right" aria-hidden="true"></i></button>
+				</div>
+			</div>
+		</div>
+	</section>
+	<section class="service-step-1-section service-step-2-section">
+		<div class="container">
+			<div class="row">
+				<div class="col-md-12">
+					<span class="tittle-of-point first-point-header">For A-Z Rate</span>
+					<ul>
+						<li>
+							<div class="step-without-arrow">
+								Step 1
+							</div>
+						</li>
+						<li>
+							<div class="step-with-arrow">
+								Step 2
+							</div>
+						</li>
+						<li>
+							<div class="step-without-arrow nth-step">
+								Step 3
+							</div>
+						</li>
+					</ul>
+
+					<div class="service-content-wrapper-step-2">
+						<span class="tittle-of-point first-table-header">File ABC.csv</span>
+						<table>
+							<tr>
+								<th>
+									<div class="select-wrapper">
+										<select class="select">
+												<option class="hidden">Call ID ▾</option>
+												<option>DNIS</option>
+												<option>Cost</option>
+										</select>
+									</div>
+								</th>
+								<th>
+									<div class="select-wrapper">
+										<select class="select">
+												<option class="hidden">ANI ▾</option>
+												<option>DNIS</option>
+												<option>Cost</option>
+										</select>
+									</div>
+								</th>
+								<th>
+									<div class="select-wrapper">
+										<select class="select">
+												<option class="hidden">DNIS ▾</option>
+												<option>DNIS</option>
+												<option>Cost</option>
+										</select>
+									</div>
+								</th>
+								<th>
+									<div class="select-wrapper">
+										<select class="select">
+												<option class="hidden">Cost ▾</option>
+												<option>DNIS</option>
+												<option>Cost</option>
+										</select>
+									</div>
+								</th>
+								<th>
+									<div class="select-wrapper">
+										<select class="select">
+												<option class="hidden">Rate ▾</option>
+												<option>DNIS</option>
+												<option>Cost</option>
+										</select>
+									</div>
+								</th>
+								<th>
+									<div class="select-wrapper">
+										<select class="select">
+												<option class="hidden">Duration ▾</option>
+												<option>DNIS</option>
+												<option>Cost</option>
+										</select>
+									</div>
+								</th>
+							</tr>
+							<tr>
+								<th></th>
+								<th></th>
+								<th></th>
+								<th></th>
+								<th></th>
+								<th></th>
+							</tr>
+							<tr class="third-line">
+								<th></th>
+								<th></th>
+								<th></th>
+								<th></th>
+								<th></th>
+								<th></th>
+							</tr>
+							<tr>
+								<th></th>
+								<th></th>
+								<th></th>
+								<th></th>
+								<th></th>
+								<th></th>
+							</tr>
+						</table>
+						<span class="tittle-of-point second-table-header">File BBB.csv</span>
+						<table>
+							<tr>
+								<th>
+									<div class="select-wrapper">
+										<select class="select">
+												<option class="hidden">Call ID ▾</option>
+												<option>DNIS</option>
+												<option>Cost</option>
+										</select>
+									</div>
+								</th>
+								<th>
+									<div class="select-wrapper">
+										<select class="select">
+												<option class="hidden">ANI ▾</option>
+												<option>DNIS</option>
+												<option>Cost</option>
+										</select>
+									</div>
+								</th>
+								<th>
+									<div class="select-wrapper">
+										<select class="select">
+												<option class="hidden">DNIS ▾</option>
+												<option>DNIS</option>
+												<option>Cost</option>
+										</select>
+									</div>
+								</th>
+								<th>
+									<div class="select-wrapper">
+										<select class="select">
+												<option class="hidden">Cost ▾</option>
+												<option>DNIS</option>
+												<option>Cost</option>
+										</select>
+									</div>
+								</th>
+								<th>
+									<div class="select-wrapper">
+										<select class="select">
+												<option class="hidden">Rate ▾</option>
+												<option>DNIS</option>
+												<option>Cost</option>
+										</select>
+									</div>
+								</th>
+								<th>
+									<div class="select-wrapper">
+										<select class="select">
+												<option class="hidden">Duration ▾</option>
+												<option>DNIS</option>
+												<option>Cost</option>
+										</select>
+									</div>
+								</th>
+							</tr>
+							<tr>
+								<th></th>
+								<th></th>
+								<th></th>
+								<th></th>
+								<th></th>
+								<th></th>
+							</tr>
+							<tr class="third-line">
+								<th></th>
+								<th></th>
+								<th></th>
+								<th></th>
+								<th></th>
+								<th></th>
+							</tr>
+							<tr>
+								<th></th>
+								<th></th>
+								<th></th>
+								<th></th>
+								<th></th>
+								<th></th>
+							</tr>
+						</table>
+						<button><i class="fa fa-angle-left" aria-hidden="true"></i> Back</button>
+						<button>Next <i class="fa fa-angle-right" aria-hidden="true"></i></button>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+	<section class="service-step-2-section">
+		<div class="container">
+			<div class="row">
+				<div class="col-md-12">
+					<span class="tittle-of-point For-US-JD-CDR">For US JD Rate</span>
+					<ul>
+						<li>
+							<div class="step-without-arrow">
+								Step 1
+							</div>
+						</li>
+						<li>
+							<div class="step-with-arrow">
+								Step 2
+							</div>
+						</li>
+						<li>
+							<div class="step-without-arrow nth-step">
+								Step 3
+							</div>
+						</li>
+					</ul>
+					<div class="service-content-wrapper-step-2">
+						<span class="tittle-of-point first-table-header">File ABC.csv</span>
+						<table>
+							<tr>
+								<th>
+									<div class="select-wrapper">
+										<select class="select">
+												<option>Call ID ▾</option>
+												<option>DNIS</option>
+												<option>Cost</option>
+										</select>
+									</div>
+								</th>
+								<th>
+									<div class="select-wrapper">
+										<select class="select">
+												<option class="hidden">ANI ▾</option>
+												<option>DNIS</option>
+												<option>Cost</option>
+										</select>
+									</div>
+								</th>
+								<th>
+									<div class="select-wrapper">
+										<select class="select">
+												<option class="hidden">DNIS ▾</option>
+												<option>DNIS</option>
+												<option>Cost</option>
+										</select>
+									</div>
+								</th>
+								<th>
+									<div class="select-wrapper">
+										<select class="select">
+												<option class="hidden">LRN ▾</option>
+												<option>DNIS</option>
+												<option>Cost</option>
+										</select>
+									</div>
+								</th>
+								<th>
+									<div class="select-wrapper">
+										<select class="select">
+												<option class="hidden">Cost ▾</option>
+												<option>DNIS</option>
+												<option>Cost</option>
+										</select>
+									</div>
+								</th>
+								<th>
+									<div class="select-wrapper">
+										<select class="select">
+												<option class="hidden">Rate ▾</option>
+												<option>DNIS</option>
+												<option>Cost</option>
+										</select>
+									</div>
+								</th>
+								<th>
+									<div class="select-wrapper">
+										<select class="select">
+												<option class="hidden">Duration ▾</option>
+												<option>DNIS</option>
+												<option>Cost</option>
+										</select>
+									</div>
+								</th>
+							</tr>
+							<tr>
+								<th></th>
+								<th></th>
+								<th></th>
+								<th></th>
+								<th></th>
+								<th></th>
+								<th></th>
+							</tr>
+							<tr class="third-line">
+								<th></th>
+								<th></th>
+								<th></th>
+								<th></th>
+								<th></th>
+								<th></th>
+								<th></th>
+							</tr>
+							<tr>
+								<th></th>
+								<th></th>
+								<th></th>
+								<th></th>
+								<th></th>
+								<th></th>
+								<th></th>
+							</tr>
+						</table>
+						<span class="tittle-of-point second-table-header">File BBB.csv</span>
+						<table>
+							<tr>
+<th>
+									<div class="select-wrapper">
+										<select class="select">
+												<option class="hidden">Call ID ▾</option>
+												<option>DNIS</option>
+												<option>Cost</option>
+										</select>
+									</div>
+								</th>
+								<th>
+									<div class="select-wrapper">
+										<select class="select">
+												<option class="hidden">ANI ▾</option>
+												<option>DNIS</option>
+												<option>Cost</option>
+										</select>
+									</div>
+								</th>
+								<th>
+									<div class="select-wrapper">
+										<select class="select">
+												<option class="hidden">DNIS ▾</option>
+												<option>DNIS</option>
+												<option>Cost</option>
+										</select>
+									</div>
+								</th>
+								<th>
+									<div class="select-wrapper">
+										<select class="select">
+												<option class="hidden">LRN ▾</option>
+												<option>DNIS</option>
+												<option>Cost</option>
+										</select>
+									</div>
+								</th>
+								<th>
+									<div class="select-wrapper">
+										<select class="select">
+												<option class="hidden">Cost ▾</option>
+												<option>DNIS</option>
+												<option>Cost</option>
+										</select>
+									</div>
+								</th>
+								<th>
+									<div class="select-wrapper">
+										<select class="select">
+												<option class="hidden">Rate ▾</option>
+												<option>DNIS</option>
+												<option>Cost</option>
+										</select>
+									</div>
+								</th>
+								<th>
+									<div class="select-wrapper">
+										<select class="select">
+												<option class="hidden">Duration ▾</option>
+												<option>DNIS</option>
+												<option>Cost</option>
+										</select>
+									</div>
+								</th>
+							</tr>
+							<tr>
+								<th></th>
+								<th></th>
+								<th></th>
+								<th></th>
+								<th></th>
+								<th></th>
+								<th></th>
+							</tr>
+							<tr class="third-line">
+								<th></th>
+								<th></th>
+								<th></th>
+								<th></th>
+								<th></th>
+								<th></th>
+								<th></th>
+							</tr>
+							<tr>
+								<th></th>
+								<th></th>
+								<th></th>
+								<th></th>
+								<th></th>
+								<th></th>
+								<th></th>
+							</tr>
+						</table>
+						<button><i class="fa fa-angle-left" aria-hidden="true"></i> Back</button>
+						<button>Next <i class="fa fa-angle-right" aria-hidden="true"></i></button>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+	<section class="fill-forms-section">
+		<div class="container">
+
+			<ul>
+				<li>
+					<div class="step-without-arrow step-1">
+						Step 1
+					</div>
+				</li>
+				<li>
+					<div class="step-without-arrow">
+						Step 2
+					</div>
+				</li>
+				<li>
+					<div class="step-with-arrow">
+						Step 3
+					</div>
+				</li>
+			</ul>
+			<div class="col-md-12">
+				<div class="service-content-wrapper-step-3">
+					<form action="">
+						<span class="tittle-of-point">When your result generated, we will email to the following address:</span><br>
+						<label for="from">From</label><br>
+						<input id="from" type="e-mail" placeholder="john@jgraph.com"><br>
+						<label for="subject">Subject</label><br>
+						<input id="subject" type="text" placeholder="Greeting"><br>
+						<label for="To">To</label><br>
+						<input id="To" type="text" placeholder="fred@jgraph.com"><br>
+						<label for="CC">CC</label><br>
+						<input id="CC" type="text"><br>
+						<label for="BCC">BCC</label><br>
+						<input id="BCC" type="text">
+						<textarea>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut lacus dui, tempor quis tristique in, porttitor placerat justo. Aliquam vitae diam metus. Mauris egestas metus eros. Mauris a ipsum at dui condimentum congue. Donec sit amet tincidunt mi. Nulla ac arcu nulla. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Nunc volutpat id risus id pretium. Donec vitae</textarea>
+						<div class="checkbox-wrapper">
+							<label for="checkbox"><input type="checkbox" id="checkbox"> When done, send notification to</label>
+							<select class="type-of-notification">
+								<option value=""></option>
+								<option value=""></option>
+								<option value=""></option>
+							</select>
+						</div>
+						<span class="tittle-of-point check-status">Check Status for this task http://denovolab.io/JFKJDMDM</span><br>
+						<div class="button-wrapper">
+							<button><i class="fa fa-angle-left" aria-hidden="true"></i> Back</button>
+							<button>Finish <i class="fa fa-check" aria-hidden="true"></i></button>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+	</section>
+	<section class="cdr-comparison rate-generation-result">
+		<div class="container">
+			<div class="row">
+				<div class="col-md-12">
+					<div class="cdr-comparison-header rate-generation-header">
+						<span id="rate">Rate Generation Result</span>
+					</div>
+				</div>
+				<div class="content-block">
+					<div class="col-md-offset-3 col-md-7">
+						<div class="span-and-button-row">
+							<span>Job ID: XXXXXX</span><button>Share</button>
+						</div>
+					</div>
+					<div class="col-md-offset-2 col-md-8">
+						<ul class="download-box">
+							<li class="download-item"><a href="#" download><img src="{{url_for('static', filename='img/download-icon.png') }}" alt="Image"><span class="download-span">Generated Rate File</span></a></li>
+							<li class="download-item"><a href="#" download><img src="{{url_for('static', filename='img/download-icon.png') }}" alt="Image"><span class="download-span">LCR File</span></a></li>
+						</ul>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+	<section class="cdr-comparison submitted-confirmation-section">
+		<div class="container">
+			<div class="row">
+				<div class="col-md-offset-1 col-md-10">
+					<div class="confirmation-section-content">
+						<div class="confirmation-section-header">
+							<span>Job Submitted Confirmation</span>
+						</div>
+						<img src="{{url_for('static', filename='img/confirmation-section-picture.png') }}" alt="Image">
+						<div class="thank-you-box">
+							<span>Thank you for submitting your job.</span>
+							<span>We will notify you via emai when your job is done.</span>
+						</div>
+						<span class="check-out-status">You may also check out status of your job with the following linke:<br>http://xxxxxx</span>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+	<section id="auto-call" class="auto-test-section">
+		<div class="container">
+			<div class="row">
+				<div class="col-md-12">
+					<div class="step-box">
+						<ul>
+							<li>
+								<div class="step-with-arrow">
+									Step 1
+								</div>
+							</li>
+							<li>
+								<div class="step-without-arrow nth-step">
+									Step 2
+								</div>
+							</li>
+							<li>
+								<div class="step-without-arrow">
+									Step 3
+								</div>
+							</li>
+						</ul>
+					</div>
+					<div class="auto-test-content-wrapper">
+						<span class="select">Select:</span>
+						<ul class="radio-button-row">
+							<li>
+								<input type="radio" id="radio-button1" name="cdr-type">
+								<label for="radio-button1">Send your own numbers</label>
+							</li>
+							<li>
+								<input type="radio" id="radio-button2" name="cdr-type">
+								<label for="radio-button2">Let us provide test number</label>
+							</li>
+						</ul><br>
+						<button><i class="fa fa-angle-left" aria-hidden="true"></i> Back</button>
+						<button>Next <i class="fa fa-angle-right" aria-hidden="true"></i></i></button>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+	<section class="auto-test-section auto-test-section-step-2">
+		<div class="container">
+			<div class="row">
+				<div class="col-md-12">
+					<div class="auto-test-section-wrapper">
+						<div class="step-box">
+							<ul>
+								<li>
+									<div class="step-without-arrow">
+										Step 1
+									</div>
+								</li>
+								<li>
+									<div class="step-with-arrow">
+										Step 2
+									</div>
+								</li>
+								<li>
+									<div class="step-without-arrow nth-step">
+										Step 3
+									</div>
+								</li>
+							</ul>
+						</div>
+						<div class="auto-test-content-box">
+							<span class="tittle-of-point send-test-call">Denovo.io will send you test calls from 2.3.4.4. Please config your switch to accoet test us.</span><br>
+							<div class="checkbox-wrap circle">
+								<input type="checkbox" id="checkbox2">
+								<span></span>
+							</div>
+							<label for="checkbox2">Send your own numbers</label><br>
+							<div class="input-text-wrapper1">
+								<input type="text" placeholder="Line 1"><img src="{{url_for('static', filename='img/close-button.png') }} " alt="Image">
+							</div>
+							<div class="input-text-wrapper2">
+								<input type="text" placeholder="Line 1"><img src="{{url_for('static', filename='img/close-button.png') }}" alt="Image">
+							</div>
+
+							<span class="tittle-of-point IP-tech">Please let us know what IP and Tech Prefix to use to send you test calls:</span><br>
+							<div class="input-text-wrapper3">
+								<label for="text1">Your Switch IP</label>
+								<input type="text" id="text1" placeholder="Line 1"><br>
+							</div>
+							<div class="input-text-wrapper4">
+								<label for="text2">What Prefix We Should Use</label>
+								<input type="text" id="text2" placeholder="Line 1"><br>
+							</div>
+							<button><i class="fa fa-angle-left" aria-hidden="true"></i> Back</button>
+							<button>Next <i class="fa fa-angle-right" aria-hidden="true"></i></button>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+	<section class="auto-test-section auto-test-section-step-2">
+		<div class="container">
+			<div class="row">
+				<div class="col-md-12">
+					<div class="auto-test-section-wrapper">
+						<div class="step-box">
+							<ul class="auto-test-section-step-2-second">
+								<li>
+									<div class="step-without-arrow">
+										Step 1
+									</div>
+								</li>
+								<li>
+									<div class="step-with-arrow">
+										Step 2
+									</div>
+								</li>
+								<li>
+									<div class="step-without-arrow nth-step">
+										Step 3
+									</div>
+								</li>
+							</ul>
+						</div>
+						<div class="auto-test-content-box">
+							<span class="tittle-of-point send-test-call">Denovo.io will send you test calls from 2.3.4.4. Please config your switch to accoet test us.</span><br>
+							<div class="checkbox-wrap circle">
+								<input type="checkbox" id="checkbox2">
+								<span></span>
+							</div>
+							<label for="checkbox2">Select a destination</label><br>
+							<div class="select-wrapper">
+								<select class="select-after" name="">
+									<option value="" class="hidden">Title</option>
+									<option value="">Item 1</option>
+									<option value="">Item 2</option>
+									<option value="">Item 3</option>
+								</select>
+							</div>
+							<span class="tittle-of-point IP-tech">Please let us know what IP and Tech Prefix to use to send you test calls:</span><br>
+							<div class="input-text-wrapper3">
+								<label for="text1">Your Switch IP</label>
+								<input type="text" id="text1" placeholder="Line 1"><br>
+							</div>
+							<div class="input-text-wrapper4">
+								<label for="text2">What Prefix We Should Use</label>
+								<input type="text" id="text2" placeholder="Line 1"><br>
+							</div>
+							<button><i class="fa fa-angle-left" aria-hidden="true"></i> Back</button>
+							<button>Next <i class="fa fa-angle-right" aria-hidden="true"></i></button>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+	<section class="fill-forms-section fill-forms-section-2">
+		<div class="container">
+
+			<ul>
+				<li>
+					<div class="step-without-arrow step-1">
+						Step 1
+					</div>
+				</li>
+				<li>
+					<div class="step-without-arrow">
+						Step 2
+					</div>
+				</li>
+				<li>
+					<div class="step-with-arrow">
+						Step 3
+					</div>
+				</li>
+			</ul>
+			<div class="col-md-12">
+				<div class="service-content-wrapper-step-3">
+					<form action="">
+						<span class="tittle-of-point">When your result generated, we will email to the following address:</span><br>
+						<label for="from">From</label><br>
+						<input id="from" type="e-mail" placeholder="john@jgraph.com"><br>
+						<label for="subject">Subject</label><br>
+						<input id="subject" type="text" placeholder="Greeting"><br>
+						<label for="To">To</label><br>
+						<input id="To" type="text" placeholder="fred@jgraph.com"><br>
+						<label for="CC">CC</label><br>
+						<input id="CC" type="text"><br>
+						<label for="BCC">BCC</label><br>
+						<input id="BCC" type="text">
+						<textarea>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut lacus dui, tempor quis tristique in, porttitor placerat justo. Aliquam vitae diam metus. Mauris egestas metus eros. Mauris a ipsum at dui condimentum congue. Donec sit amet tincidunt mi. Nulla ac arcu nulla. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Nunc volutpat id risus id pretium. Donec vitae</textarea>
+						<div class="checkbox-wrapper">
+							<label for="checkbox"><input type="checkbox" id="checkbox"> When done, send notification to</label>
+							<select class="type-of-notification">
+								<option value=""></option>
+								<option value=""></option>
+								<option value=""></option>
+							</select>
+						</div>
+						<span class="tittle-of-point check-status">Check Status for this task http://denovolab.io/JFKJDMDM</span><br>
+						<div class="button-wrapper">
+							<button><i class="fa fa-angle-left" aria-hidden="true"></i> Back</button>
+							<button>Finish <i class="fa fa-check" aria-hidden="true"></i></button>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+	</section>
+	<section class="auto-call-result-section">
+		<div class="container">
+			<div class="row">
+				<div class="col-md-12">
+					<div class="section-tittle-box auto-call-result-tittle">
+						<span>Auto Call Result</span>
+					</div>
+					<table class="auto-call-result-table">
+						<tr>
+							<th>Time initiated</th>
+							<th>Destination number</th>
+							<th>State</th>
+							<th>PDD</th>
+							<th>Ring<br>Duration</th>
+							<th>Call<br>Duration</th>
+							<th>RTP Atats<br>MOS</th>
+							<th>Disconect<br>Initiator</th>
+							<th>Final SIP<br>Code</th>
+							<th>Result</th>
+							<td colspan="2" style="text-align: center;">
+								Audio<br>RBT &nbsp;&nbsp;&nbsp;Call
+							</td>
+							<th>Log</th>
+						</tr>
+						<tr class="grey-color-bg">
+							<th>16:15:59</th>
+							<th>15138892630</th>
+							<th class="green-comlete">Complete</th>
+							<th>N/A<br>(N/A)</th>
+							<th>NA</th>
+							<th>NA</th>
+							<th>0/0<br>0/0/0</th>
+							<th>Terminator</th>
+							<th></th>
+							<th><u>Conn.Error</u></th>
+							<th>NA</th>
+							<th>NA</th>
+							<th><img src="{{ url_for('static', filename = 'img/file-icon.png') }}" alt=""></th>
+						</tr>
+						<tr>
+							<th>16:15:59</th>
+							<th>15138892630</th>
+							<th class="green-comlete">Complete</th>
+							<th>N/A<br>(N/A)</th>
+							<th>NA</th>
+							<th>NA</th>
+							<th>0/0<br>0/0/0</th>
+							<th>Terminator</th>
+							<th></th>
+							<th><u>Conn.Error</u></th>
+							<th>NA</th>
+							<th>NA</th>
+							<th><img src="{{ url_for('static', filename = 'img/file-icon.png') }}" alt=""></th>
+						</tr>
+						<tr class="grey-color-bg">
+							<th>16:15:59</th>
+							<th>15138892630</th>
+							<th class="green-comlete">Complete</th>
+							<th>N/A<br>(N/A)</th>
+							<th>10.0</th>
+							<th>15.1</th>
+							<th>0/1241<br>0/0/0</th>
+							<th>Terminator</th>
+							<th>200 Closing</th>
+							<th>Failure<br><span class="red-failure">Dead Air</span></th>
+							<th>NA</th>
+							<th>NA</th>
+							<th><img src="{{ url_for('static', filename = 'img/file-icon.png') }}" alt=""></th>
+						</tr>
+						<tr>
+							<th>16:15:59</th>
+							<th>15138892630</th>
+							<th class="green-comlete">Complete</th>
+							<th>N/A<br>(N/A)</th>
+							<th>NA</th>
+							<th>NA</th>
+							<th>0/1241<br>0/0/0</th>
+							<th>Terminator</th>
+							<th>200 OK</th>
+							<th>Failure<br><span class="red-failure">Dead Air</span></th>
+							<th>NA</th>
+							<th>NA</th>
+							<th><img src="{{ url_for('static', filename = 'img/file-icon.png') }}" alt=""></th>
+						</tr>
+						<tr class="grey-color-bg">
+							<th>16:15:59</th>
+							<th>15138892630</th>
+							<th class="green-comlete">Complete</th>
+							<th>N/A<br>(N/A)</th>
+							<th>NA</th>
+							<th>NA</th>
+							<th>0/0<br>0/0/0</th>
+							<th>Terminator</th>
+							<th>503 Service</th>
+							<th>Failure</th>
+							<th>NA</th>
+							<th>NA</th>
+							<th><img src="{{ url_for('static', filename = 'img/file-icon.png') }}" alt=""></th>
+						</tr>
+						<tr>
+							<th>16:15:59</th>
+							<th>15138892630</th>
+							<th class="green-comlete">Complete</th>
+							<th>N/A<br>(N/A)</th>
+							<th>NA</th>
+							<th>NA</th>
+							<th>0/0<br>0/0/0</th>
+							<th>Terminator</th>
+							<th>200 OK<br>ABR</th>
+							<th>Failure</th>
+							<th><img src="{{ url_for('static', filename = 'img/play-icon-blue.png') }}" alt=""></th>
+							<th><img src="{{ url_for('static', filename = 'img/play-icon-blue.png') }}" alt=""></th>
+							<th><img src="{{ url_for('static', filename = 'img/file-icon.png') }}" alt=""></th>
+						</tr>
+					</table>
+				</div>
+			</div>
+		</div>
+	</section>
+	<section class="auto-test-section auto-test-section-step-2 manual-test-step-1">
+		<div class="container">
+			<div class="row">
+				<div class="col-md-12">
+					<div class="auto-test-section-wrapper">
+						<div id="manual" class="section-tittle-box tittle-step-1">
+							<span>STEP 1</span>
+						</div>
+						<div class="auto-test-content-box">
+							<span class="tittle-of-point send-test-call">Denovo.io will send you test calls from 2.3.4.4. Please config your switch to accoet test &nbsp;from us.</span><br>
+							<div class="calc-num-wrapper">
+								<table class="calc-num-table">
+									<tr>
+										<td>
+											<div class="calc">
+												<div class="tr">
+													<div class="num">1</div>
+													<div class="num">2</div>
+													<div class="num">3</div><br>
+												</div>
+												<div class="tr">
+													<div class="num">4</div>
+													<div class="num">5</div>
+													<div class="num">6</div><br>
+												</div>
+												<div class="tr">
+													<div class="num">7</div>
+													<div class="num">8</div>
+													<div class="num">9</div><br>
+												</div>
+												<div class="tr">
+													<div class="num">*</div>
+													<div class="num">0</div>
+													<div class="num">#</div>
+												</div>
+											</div>
+										</td>
+										<td>
+											<div class="for-num-wrapper">
+												<label for="for-num">Your Switch IP</label><br>
+												<input id="for-num" type="text">
+											</div>
+										</td>
+									</tr>
+								</table>
+
+							</div>
+
+							<span class="tittle-of-point IP-tech">Please let us know what IP and Tech Prefix to use to send you test calls:</span><br>
+							<div class="input-text-wrapper3">
+								<label for="text1">Your Switch IP</label>
+								<input type="text" id="text1" placeholder="Line 1"><br>
+							</div>
+							<div class="input-text-wrapper4 input-text-wrapper4-customize">
+								<label for="text2">What Prefix We Should Use</label>
+								<input type="text" id="text2" placeholder="Line 1"><br>
+							</div>
+							<div class="button-connect-col-now-disconnect-wrapper">
+								<button class="connected">Conntected</button>
+								<button class="cal-now">Cal Now</button>
+								<button class="disconnect">Disconnect</button>
+							</div>
+							<button><i class="fa fa-angle-left" aria-hidden="true"></i> Back</button>
+							<button>Finish <i class="fa fa-check" aria-hidden="true"></i></button>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+	<section class="cdr-comparison service-step-2-section test-result-section">
+		<div class="container">
+			<div class="row">
+				<div class="col-md-12">
+					<div class="cdr-comparison-header cdr-comparison-header-customize">
+						<span>Test Result</span>
+					</div>
+					<div class="test-result-wrapper">
+						<div class="button-and-span-wrapper">
+							<span class="tittle-of-point">Job ID: XXXXXX</span>
+							<div class="button-wrapper">
+								<button class="email-share">Email Share</button>
+								<button>Share Result</button>
+							</div>
+						</div>
+						<table>
+							<tr>
+								<th>
+									<div class="select-wrapper">
+										<select class="select">
+												<option class="hidden">Call ID ▾</option>
+												<option>DNIS</option>
+												<option>Cost</option>
+										</select>
+									</div>
+								</th>
+								<th>
+									<div class="select-wrapper">
+										<select class="select">
+												<option class="hidden">Calling number ▾</option>
+												<option>DNIS</option>
+												<option>Cost</option>
+										</select>
+									</div>
+								</th>
+								<th>
+									<div class="select-wrapper">
+										<select class="select">
+												<option class="hidden">Duration ▾</option>
+												<option>DNIS</option>
+												<option>Cost</option>
+										</select>
+									</div>
+								</th>
+								<th>
+									<div class="select-wrapper">
+										<select class="select">
+												<option class="hidden">Start Time ▾</option>
+												<option>DNIS</option>
+												<option>Cost</option>
+										</select>
+									</div>
+								</th>
+								<th>
+									<div class="select-wrapper">
+										<select class="select">
+												<option class="hidden">End Time ▾</option>
+												<option>DNIS</option>
+												<option>Cost</option>
+										</select>
+									</div>
+								</th>
+							</tr>
+							<tr>
+								<th></th>
+								<th></th>
+								<th></th>
+								<th></th>
+								<th></th>
+							</tr>
+							<tr class="third-line">
+								<th></th>
+								<th></th>
+								<th></th>
+								<th></th>
+								<th></th>
+							</tr>
+							<tr>
+								<th></th>
+								<th></th>
+								<th></th>
+								<th></th>
+								<th></th>
+							</tr>
+						</table>
+						<ul class="test-result-ring-media-caprture-list">
+							<li><img src="{{ url_for('static', filename = 'img/ring-tone-icon.png') }}" alt="Image"><span>Ring Tone</span></li>
+							<li><img src="{{ url_for('static', filename = 'img/live-media-icon.png') }}" alt="Image"><span>Live Media</span></li>
+							<li><img src="{{ url_for('static', filename = 'img/sip-capture-icon.png') }}" alt="Image"><span>SIP Capture</span></li>
+						</ul>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+	<section class="fill-forms-section fill-forms-section-customize">
+		<div class="container">
+			<div class="col-md-12">
+				<div class="service-content-wrapper-step-3">
+					<form action="">
+						<span class="tittle-of-point tittle-of-point-customize">When your result generated, we will email to the following address:</span><br>
+						<label for="from">From</label><br>
+						<input id="from" type="e-mail" placeholder="john@jgraph.com"><br>
+						<label for="subject">Subject</label><br>
+						<input id="subject" type="text" placeholder="Greeting"><br>
+						<label for="To">To</label><br>
+						<input id="To" type="text" placeholder="fred@jgraph.com"><br>
+						<label for="CC">CC</label><br>
+						<input id="CC" type="text"><br>
+						<label for="BCC">BCC</label><br>
+						<input id="BCC" type="text">
+						<textarea>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut lacus dui, tempor quis tristique in, porttitor placerat justo. Aliquam vitae diam metus. Mauris egestas metus eros. Mauris a ipsum at dui condimentum congue. Donec sit amet tincidunt mi. Nulla ac arcu nulla. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Nunc volutpat id risus id pretium. Donec vitae</textarea>
+						<div class="checkbox-wrapper">
+							<label for="checkbox"><input type="checkbox" id="checkbox"> When done, send notification to</label>
+							<select class="type-of-notification">
+								<option value=""></option>
+								<option value=""></option>
+								<option value=""></option>
+							</select>
+						</div>
+						<span class="tittle-of-point check-status">Check Status for this task http://denovolab.io/JFKJDMDM</span><br>
+
+					</form>
+				</div>
+			</div>
+		</div>
+	</section>
+
+<!-- 	<div class="hidden"> -->
+<!-- 	</div> -->
+
+
+	<!--[if lt IE 9]>
+	<script src="libs/html5shiv/es5-shim.min.js"></script>
+	<script src="libs/html5shiv/html5shiv.min.js"></script>
+	<script src="libs/html5shiv/html5shiv-printshiv.min.js"></script>
+	<script src="libs/respond/respond.min.js"></script>
+	<![endif]-->
+
+	<!-- Load CSS -->
+	<script>
+		function loadCSS(hf) {
+			var ms=document.createElement("link");ms.rel="stylesheet";
+			ms.href=hf;document.getElementsByTagName("head")[0].appendChild(ms);
+		}
+		loadCSS("{{url_for('static', filename='css/header.min.css') }}"); //Header Styles (compress & paste to header after release)
+		loadCSS("{{url_for('static', filename='css/main.min.css') }}");   //User Styles + Media Queries
+	</script>
+
+	<!-- Load Scripts -->
+	<script>var scr = {"scripts":[
+		{"src" : "{{url_for('static', filename='js/libs.js') }}", "async" : false},
+		{"src" : "{{url_for('static', filename='js/common.js') }}", "async" : false}
+		]};!function(t,n,r){"use strict";var c=function(t){if("[object Array]"!==Object.prototype.toString.call(t))return!1;for(var r=0;r<t.length;r++){var c=n.createElement("script"),e=t[r];c.src=e.src,c.async=e.async,n.body.appendChild(c)}return!0};t.addEventListener?t.addEventListener("load",function(){c(r.scripts);},!1):t.attachEvent?t.attachEvent("onload",function(){c(r.scripts)}):t.onload=function(){c(r.scripts)}}(window,document,scr);
+	</script>
+
+</body>
+</html>
